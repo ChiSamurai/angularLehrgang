@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/map';
+
 @Injectable()
 export class LedService {
 
@@ -15,5 +17,14 @@ export class LedService {
    */
   getColors(): Observable<string[]> {
     return this.client.get<string[]>(`${this.URL}/colors`);
+  }
+
+  /**
+   * get color at the colors array's index
+   * @param index
+   */
+  getColor(index: number): Observable<string>{
+    return this.getColors()
+    .map(colors => colors[index]);
   }
 }

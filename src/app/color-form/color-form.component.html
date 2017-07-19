@@ -1,0 +1,20 @@
+<p>
+  color-form works!
+</p>
+<form #inputcolorForm="ngForm" (ngSubmit)="updateColor(inputcolorForm.value.targetcolor)">
+  <input type="text" required [minlength]="minlength" [(ngModel)]="color" name="targetcolor" #inputcolor="ngModel">
+  <pre *ngIf="true">
+    <code>
+      {{ inputcolor.errors | json | slice:0:15}}
+    </code>
+  </pre>
+  <p *ngIf="inputcolor.errors?.required">
+    Please enter a color!
+  </p>
+  <p *ngIf="inputcolor.errors?.minlength">
+    Please enter at least {{ minlength }} characters!
+  </p>
+  <button type="submit" [disabled]="inputcolorForm.invalid">
+    Set Color
+  </button>
+</form>

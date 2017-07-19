@@ -1,7 +1,10 @@
 <p>
   led-list works!
 </p>
-<div *ngFor="let c of colors; index as i">
-  {{ i }}
-  <pi-led [color]="c"></pi-led>
+<div *ngFor="let c of colors$ | async as colors; index as i">
+  {{ i+1 }} / {{ colors.length }}
+  <pi-led [color]="c" [index]="i" (colorChange)="selectColor($event)"></pi-led>
+  <a [routerLink]="[ '/leds', i]">
+    Details
+  </a>
 </div>
